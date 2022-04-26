@@ -1,4 +1,4 @@
-console.log('lesson 2');
+console.log("lesson 2");
 
 // Lexical environment
 // http://jsflow.org/docs/lex-env/
@@ -20,10 +20,11 @@ console.log('lesson 2');
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
-
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
+const sum = (a: number) => (b: number) => a + b;
+console.log(sum(3)(6));
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -34,6 +35,18 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+const makeCounter = () => {
+  let count = 0;
+  return () => ++count;
+};
+const counter = makeCounter();
+const counter2 = makeCounter();
+
+console.log(counter());
+console.log(counter());
+console.log(counter2());
+console.log(counter());
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -41,6 +54,36 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+const makeCount = (start: number = 0) => ({
+  _counter: start,
+  increase() {
+    ++this._counter;
+  },
+  decrease() {
+    --this._counter;
+  },
+  reset() {
+    this._counter = 0;
+  },
+  set(setValue: number) {
+    this._counter = setValue;
+  },
+});
+
+const count = makeCount(5);
+console.log(count._counter);
+count.decrease();
+console.log(count._counter);
+
+count.increase();
+console.log(count._counter);
+
+count.reset();
+console.log(count._counter);
+
+count.set(5);
+console.log(count._counter);
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -54,11 +97,55 @@ console.log('lesson 2');
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
+const superSum = (count: number) => {
+  if (count === 0) return 0;
+  if (count === 1) return (first: number) => first;
+
+  let argsArr: number[] = [];
+  //@ts-ignore
+  return function inner(...rest: number[]) {
+    argsArr = [...argsArr, ...rest];
+    return argsArr.length < count
+      ? inner
+      : argsArr.slice(0, count).reduce((sum, el) => sum + el);
+  };
+};
+//@ts-ignore
+console.log(superSum(0)); //0
+//@ts-ignore
+console.log(superSum(3)(2)(5)(3)); //)10
+//@ts-ignore
+console.log(superSum(3)(2)(5, 3)); //10
+//@ts-ignore
+console.log(superSum(3)(2, 5, 3)); //10
+//@ts-ignore
+console.log(superSum(3)(2, 5)(3)); //10
+//@ts-ignore
+console.log(superSum(3)(2, 5)(3, 9)); //10
+
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
+//@ts-ignore
+const customFlat = (arr: any[]) => {
+  
+    let result:any[] = []
+
+    arr.forEach(
+        el=>Array.isArray(el)
+        ?result = [...result,...customFlat(el)]
+        :result = [...result,el]
+    )
+    return result
+
+    
+};
+
+console.log(customFlat([1, 2, [3, 4, [5, 6]]]));
+
 // just a plug
-export default () => {};
+const plug = () => {};
+export default plug;
