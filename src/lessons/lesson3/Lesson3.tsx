@@ -25,7 +25,7 @@ const Lesson3 = () => {
         ? setSearchResult(JSON.stringify(Search))
         : setSearchResult(Error);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

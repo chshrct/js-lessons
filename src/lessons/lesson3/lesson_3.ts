@@ -1,6 +1,6 @@
 import axios from "axios";
 
-console.log("lesson 3");
+// console.log("lesson 3");
 
 // Event loop
 // https://learn.javascript.ru/event-loop +
@@ -44,10 +44,18 @@ const omdb = {
   },
 };
 
-omdb.get().then(console.log);
-omdb.post('foo','bar',1).then(console.log);
-omdb.put(1,'foo','bar',1).then(console.log);
-omdb.delete(1).then(console.log);
+omdb.get().then(
+  // console.log
+  );
+omdb.post('foo','bar',1).then(
+  // console.log
+  );
+omdb.put(1,'foo','bar',1).then(
+  // console.log
+  );
+omdb.delete(1).then(
+  // console.log
+  );
 
 
 // just a plug

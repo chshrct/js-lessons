@@ -1,4 +1,4 @@
-console.log("lesson 2");
+// console.log("lesson 2");
 
 // Lexical environment
 // http://jsflow.org/docs/lex-env/
@@ -24,7 +24,7 @@ console.log("lesson 2");
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
 const sum = (a: number) => (b: number) => a + b;
-console.log(sum(3)(6));
+// console.log(sum(3)(6));
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -42,10 +42,10 @@ const makeCounter = () => {
 const counter = makeCounter();
 const counter2 = makeCounter();
 
-console.log(counter());
-console.log(counter());
-console.log(counter2());
-console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// console.log(counter2());
+// console.log(counter());
 
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
@@ -72,18 +72,18 @@ const makeCount = (start: number = 0) => ({
 });
 
 const count = makeCount(5);
-console.log(count._counter);
+// console.log(count._counter);
 count.decrease();
-console.log(count._counter);
+// console.log(count._counter);
 
 count.increase();
-console.log(count._counter);
+// console.log(count._counter);
 
 count.reset();
-console.log(count._counter);
+// console.log(count._counter);
 
 count.set(5);
-console.log(count._counter);
+// console.log(count._counter);
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -110,18 +110,18 @@ const superSum = (count: number) => {
       : argsArr.slice(0, count).reduce((sum, el) => sum + el);
   };
 };
-//@ts-ignore
-console.log(superSum(0)); //0
-//@ts-ignore
-console.log(superSum(3)(2)(5)(3)); //)10
-//@ts-ignore
-console.log(superSum(3)(2)(5, 3)); //10
-//@ts-ignore
-console.log(superSum(3)(2, 5, 3)); //10
-//@ts-ignore
-console.log(superSum(3)(2, 5)(3)); //10
-//@ts-ignore
-console.log(superSum(3)(2, 5)(3, 9)); //10
+// //@ts-ignore
+// console.log(superSum(0)); //0
+// //@ts-ignore
+// console.log(superSum(3)(2)(5)(3)); //)10
+// //@ts-ignore
+// console.log(superSum(3)(2)(5, 3)); //10
+// //@ts-ignore
+// console.log(superSum(3)(2, 5, 3)); //10
+// //@ts-ignore
+// console.log(superSum(3)(2, 5)(3)); //10
+// //@ts-ignore
+// console.log(superSum(3)(2, 5)(3, 9)); //10
 
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
@@ -144,7 +144,7 @@ const customFlat = (arr: any[]) => {
     
 };
 
-console.log(customFlat([1, 2, [3, 4, [5, 6]]]));
+// console.log(customFlat([1, 2, [3, 4, [5, 6]]]));
 
 // just a plug
 const plug = () => {};

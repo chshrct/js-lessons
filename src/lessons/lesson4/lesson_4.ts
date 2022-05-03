@@ -1,4 +1,4 @@
-console.log("lesson 4");
+// console.log("lesson 4");
 
 // http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
 // https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
@@ -8,23 +8,27 @@ console.log("lesson 4");
 // В конструкторе промиса выведите в консоль сообщение "Promise is created".
 
 const prPending = new Promise((res, rej) => {
-  console.log("Promise is created");
+  // console.log("Promise is created");
 });
-console.log("prPending", prPending);
+// console.log("prPending", prPending);
 
 // Task 02
 // Создайте промис, который после создания сразу же переходит в состояние resolve
 // и возвращает строку 'Promise Data'
 // Получите данные промиса и выведите их в консоль
-const prResolved = Promise.resolve("PromiseData").then(console.log);
-console.log("prResolved", prResolved);
+const prResolved = Promise.resolve("PromiseData").then(
+  // console.log
+  );
+// console.log("prResolved", prResolved);
 
 // Task 03
 // Создайте промис, который после создания сразу же переходит в состояние rejected
 // и возвращает строку 'Promise Error'
 // Получите данные промиса и выведите их в консоль
-const prRejected = Promise.reject("Promise Error").catch(console.log);
-console.log("prRejected", prRejected);
+const prRejected = Promise.reject("Promise Error").catch(err=>{}
+  // console.log
+  );
+// console.log("prRejected", prRejected);
 
 // Task 04
 // Создайте промис, который переходит в состояние resolved через 3с.
@@ -36,9 +40,11 @@ const prDelayed = new Promise((res, rej) => {
   setTimeout(() => {
     res("Promise Data");
   }, 3000);
-}).then(console.log);
+}).then(
+  // console.log
+  );
 
-console.log("prDelayed", prDelayed);
+// console.log("prDelayed", prDelayed);
 
 // Task 05
 // Создайте литерал объекта handlePromise со следующими свойствами:
@@ -58,10 +64,10 @@ const handlePromise = {
   resolve: null,
   reject: null,
   onSuccess(paramName: string) {
-    console.log(`Promise is resolved with data: ${paramName}`);
+    // console.log(`Promise is resolved with data: ${paramName}`);
   },
   onError(paramName: string) {
-    console.log(`Promise is rejected with error: ${paramName}`);
+    // console.log(`Promise is rejected with error: ${paramName}`);
   },
 };
 
@@ -73,7 +79,7 @@ export const createPromiseHandler = () => {
     //@ts-ignore
     handlePromise.reject = rej;
   });
-  console.log(handlePromise.promise);
+  // console.log(handlePromise.promise);
 };
 
 export const resolvePromiseHandler = () => {
@@ -101,7 +107,7 @@ const onSuccess = (arg: any) => {
 };
 
 const print = (arg: string) => {
-  console.log(arg);
+  // console.log(arg);
 };
 
 new Promise((res, rej) => {
@@ -118,47 +124,33 @@ new Promise((res, rej) => {
 // Получите результаты работы промисов, объедините свойства объектов
 // и выведите в консоль {name, age, city}
 
-const pr1 = new Promise(
-  (res,rej)=>{
-    setTimeout(
-      ()=>{
-        res({name:'Anna'})
-      },2000
-    )
-  }
-)
-const pr2 = new Promise(
-  (res,rej)=>{
-    setTimeout(
-      ()=>{
-        res({age: 16})
-      },3000
-    )
-  }
-)
-const pr3 = new Promise(
-  (res,rej)=>{
-    setTimeout(
-      ()=>{
-        res({city: ''})
-      },4000
-    )
-  }
-)
+const pr1 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res({ name: "Anna" });
+  }, 2000);
+});
+const pr2 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res({ age: 16 });
+  }, 3000);
+});
+const pr3 = new Promise((res, rej) => {
+  setTimeout(() => {
+    res({ city: "" });
+  }, 4000);
+});
 
 const cLog = async () => {
-  const obj={}
+  const obj = {};
   //@ts-ignore
-  obj.name = (await pr1).name
+  obj.name = (await pr1).name;
   //@ts-ignore
-  obj.age = (await pr2).age
+  obj.age = (await pr2).age;
   //@ts-ignore
-  obj.city = (await pr3).city
-  console.log(obj);
-  
-}
-cLog()
-
+  obj.city = (await pr3).city;
+  // console.log(obj);
+};
+cLog();
 
 // just a plug
 const z = () => {};
