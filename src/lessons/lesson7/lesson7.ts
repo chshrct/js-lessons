@@ -20,17 +20,70 @@ console.log('Lesson 7');
 // walk => `${this.name} walking`
 // проверить, что методы работают
 
+class Animal{
+    name
+    constructor(name='Animal'){
+        this.name=name
+    }
+    walk(){
+        console.log(`${this.name} walks`);
+    }
+    eat(){
+        console.log(`${this.name} eats`);
+    }
+    sleep(){
+        console.log(`${this.name} sleeps`);
+    }
+}
+const animal = new Animal
+animal.walk()
+animal.eat()
+animal.sleep()
+
 
 //Task 02
 // Реализовать класс Monkey на базе класса Animal,  конструктор принимает name(по умолчанию 'Monkey') в качестве
 // параметра, реализовать методы roar и climb аналогично классу Animal
 // проверить, что все методы работают
 
+class Monkey extends Animal{
+    constructor(name='Monkey'){
+        super(name)
+    }
+    roar(){
+        console.log(`${this.name} roars`);
+    }
+    climb(){
+        console.log(`${this.name} climbs`);
+    }
+}
+const monkey = new Monkey
+monkey.climb()
+monkey.roar()
+monkey.eat()
+
 
 //Task 03
 // Реализовать класс Human на базе класса Monkey, конструктор принимает name(по умолчанию 'Human') в качестве
 // параметра, реализовать методы speak и think аналогично классу Animal
 // проверить, что все методы работают
+
+class Human extends Monkey{
+    constructor(name='Human'){
+        super(name)
+    }
+    speak(){
+        console.log(`${this.name} speaks`);
+    }
+    think(){
+        console.log(`${this.name} thinks`);
+    }
+}
+
+const human = new Human
+human.think()
+human.speak()
+human.eat()
 
 
 // Task 04
