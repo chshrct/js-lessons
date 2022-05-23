@@ -226,7 +226,7 @@ function checkClosedBracketsStack(string) {
 		if (openBr.includes(string[i])) { stack.push(string[i]) } else {
 			if (stack[stack.length - 1] === openBr[closingBr.indexOf(string[i])]) {
 				stack.pop()
-			}else{
+			} else {
 				return false
 			}
 		}
@@ -238,35 +238,58 @@ console.log('task11', checkClosedBracketsStack(str));
 
 // Task 12
 // Необходимо написать функцию, принимающую в аргументах массив целых чисел и возвращающую новый массив, состоящий только из уникальных значений первого массива.
-let testArr = [1,2,3,4,5,6,7,8,9,0,0,9,8,7,6,5,4,3,2,1,1,3,23,425]
+let testArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 3, 23, 425]
 
-function uniqueItems(arr){
-	const obj = arr.reduce((acc,el)=>({...acc,[el]:0}),{})
-	const newArr=[]
-	for(let key in obj){
+function uniqueItems(arr) {
+	const obj = arr.reduce((acc, el) => ({ ...acc, [el]: 0 }), {})
+	const newArr = []
+	for (let key in obj) {
 		newArr.push(key)
 	}
 	return newArr
 }
-console.log('task 12',uniqueItems(testArr));
+console.log('task 12', uniqueItems(testArr));
 
 
 // Task 13
 // Написать функцию, принимающую аргументом массив чисел и возвращающую новый массив, состоящий из удвоенных значений первого.
 // f([1, 2, null, 7, 8, null, 3]); // => [2, 4, 14, 16, 6]
 
-function doubledArr (arr){
+function doubledArr(arr) {
 	const newArr = []
-	arr.forEach(el=>{
-		if(Number.isFinite(el)) newArr.push(el*2)
+	arr.forEach(el => {
+		if (Number.isFinite(el)) newArr.push(el * 2)
 	})
 	return newArr
 }
-console.log('task 13',doubledArr([1, 2, null, 7, 8, null, 3]));
+console.log('task 13', doubledArr([1, 2, null, 7, 8, null, 3]));
 
 // Task 14
 // Необходимо написать функцию, возвращающую значения всех вершин дерева
 // getTreeValues(tree); // => [1, 2, 3, 4, 5, 6, 7]
+
+const treeValuesArrRecursion = (tree) => {
+	let arr = []
+	return (function inner(node) {
+		arr.push(node.value)
+		if (node.children) {
+			node.children.forEach(el => inner(el))
+		}
+		return arr
+	})(tree)
+}
+
+const treeValuesArrCircle = (tree) => {
+	let arr = [tree.value]
+	let que = []
+	tree.children.forEach(el => que.push(el))
+	while (que.length > 0) {
+		let currentNode = que.pop()
+		arr.push(currentNode.value)
+		if (currentNode.children) currentNode.children.forEach(el => que.push(el))
+	}
+	return arr
+}
 
 const tree2 = {
 	value: 1,
@@ -287,21 +310,82 @@ const tree2 = {
 		}
 	]
 };
+console.log('task14', treeValuesArrRecursion(tree2));
+console.log('task14', treeValuesArrCircle(tree2));
+
 
 // Task 15
 // Необходимо написать функцию, возвращающую сумму всех вершин дерева из Task 14
 
+const treeNodesSum = (tree) => {
+
+	if (!Array.isArray(tree.children)) return tree.value
+	return tree.children.reduce((acc, el) => acc + treeNodesSum(el), tree.value)
+}
+console.log('task15', treeNodesSum(tree2));
+
+
 // Task 16
 // Надо реализовать «бомбу» (в виде функции-конструктора), которая получает на входе время, через которое взорвется и
 // некоторый «звук взрыва» (строку, которую вернет через заданное время).
+
+function Bomb(timer, sound) {
+	this.sound = sound
+	setTimeout(this.boom.bind(this), timer)
+}
+Bomb.prototype.boom = function () {
+	console.log('task16', this.sound);
+}
+const bomb = new Bomb(3000, 'KABOOOM!')
 
 // Task 17
 // Необходимо реализовать функцию, принимающую в аргументах строку, состоящую из букв и вернуть новую строку,
 // в которой повторяющиеся буквы заменены количеством повторений.
 // rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'); // => 'AV3B3V2XDHJF4D6HA4J3D2SLS3D4'
 
+function countRepeating(string) {
+	let arr = string.split('').reduce((acc, el) => {
+		acc.hasOwnProperty(el) ? acc[el]++ : acc[el] = 1;
+		return acc
+	}, {})
+
+	let result = ''
+	for (let key in arr) {
+		result += key + arr[key]
+	}
+	return result
+}
+console.log('task17', countRepeating('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'));
+
+function countRepeatingOriginal(string) {
+	let arr = string.split('')
+	let count = 0
+	let result = ''
+	for (let i = 0; i < arr.length; i++) {
+		count++
+		if (arr[i] !== arr[i + 1]) {
+			if (count === 1) {
+				result = result + arr[i]
+			} else {
+				result = result + arr[i] + count
+
+			}
+			count = 0
+		}
+	}
+	return result
+}
+
+console.log('task17', countRepeatingOriginal('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'));
+
 // Task 18
 // Реализуйте функцию isSorted(), которая возвращает true или false в зависимости о того, отсортирован ли переданный ей числовой массив.
+
+const isSorted = (arr) => {
+	return arr.every((el, index, arr) => arr[index + 1] ? el < arr[index + 1] : true)
+}
+
+console.log('task18', isSorted([1, 2, 3, 4, 5, 10]));
 
 // Task 19
 // Реализуйте функцию missing(), которая принимает неотсортированный массив уникальных чисел (то есть, числа в нём не повторяются)
@@ -313,6 +397,21 @@ const tree2 = {
 // missing([5, 1, 4, 2])               // 3
 // missing([1, 2, 3, 4])               // undefined
 
+function missing(arr) {
+	if (arr.length < 3) return undefined
+	let sorted = arr.sort((a, b) => a - b)
+	for (let i = 1; i < sorted.length + 1; i++) {
+		if (i !== sorted[i - 1]) return i
+	}
+}
+console.log('task19', missing([]));
+console.log('task19', missing([1, 4, 3]));
+console.log('task19', missing([2, 3, 4]));
+console.log('task19', missing([5, 1, 4, 2]));
+console.log('task19', missing([1, 2, 3, 4]));
+
+
+
 // Task 20
 // Реализуйте класс LinkedList, не используя встроенные массивы JavaScript ( [] ). Ваш LinkedList должен поддерживать лишь 2 метода: add() и has().
 // class LinkedList {...}
@@ -323,17 +422,59 @@ const tree2 = {
 // list.has(4)                           // true
 // list.has(6)                           // false
 
+class LinkedListNode {
+	constructor(value, next = null) {
+		this.value = value
+		this.next = next
+	}
+}
+
+class LinkedList {
+	constructor(...args) {
+		this.head = null
+		this.tail = null
+		args.forEach(val => this.add(val))
+	}
+	add(value) {
+		const newNode = new LinkedListNode(value)
+		if (!this.head || !this.tail) {
+			this.head = newNode
+			this.tail = newNode
+			return this
+		}
+		this.tail.next = newNode
+		this.tail = newNode
+	}
+	has(value) {
+		if (!this.head) return false
+		let currentNode = this.head
+		while (currentNode) {
+			if (currentNode.value === value) return true
+			currentNode = currentNode.next
+		}
+		return false
+	}
+}
+
+let list = new LinkedList(1, 2, 3)
+console.log('task20', list.add(4));
+console.log('task20', list.add(5));
+console.log('task20', list.has(1));
+console.log('task20', list.has(4));
+console.log('task20', list.has(6));
+
+
 // Task 21
 // Что выведет консоль?
 
-// Promise
-// 	.resolve()
-// 	.then(() => console.log(1))
-// 	.then(() => console.log(2))
-// 	.then(() => console.log(3));
+Promise
+	.resolve()
+	.then(() => console.log('task21',1))
+	.then(() => console.log('task21',2))
+	.then(() => console.log('task21',3));
 
-// Promise
-// 	.resolve()
-// 	.then(() => console.log(4))
-// 	.then(() => console.log(5))
-// 	.then(() => console.log(6));
+Promise
+	.resolve()
+	.then(() => console.log('task21',4))
+	.then(() => console.log('task21',5))
+	.then(() => console.log('task21',6));
